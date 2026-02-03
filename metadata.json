@@ -1,0 +1,10 @@
+
+{
+  "name": "AI Management & Monitoring portal (AGM Portal)",
+  "description": "A comprehensive oversight portal for AI initiatives, providing management dashboards for seniors and streamlined reporting for researchers, featuring a context-aware AI assistant with Supabase persistence.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ]
+}
