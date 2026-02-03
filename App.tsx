@@ -1,6 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { UserRole, AIProject } from './types';
+import { INITIAL_PROJECTS } from './constants';
 import { supabase } from './services/supabaseClient';
 import Sidebar from './components/Sidebar';
 import Dashboard from './components/Dashboard';
@@ -30,9 +31,17 @@ const App: React.FC = () => {
           .order('last_updated', { ascending: false });
 
         if (error) throw error;
-        if (data) setProjects(data as AIProject[]);
+
+        if (data && data.length > 0) {
+          setProjects(data as AIProject[]);
+        } else {
+          // Fallback seed so the UI renders with sample data when the table is empty
+          setProjects(INITIAL_PROJECTS);
+        }
       } catch (err) {
         console.error('Data Fetch Error:', err);
+        // Offline / misconfigured Supabase? Use bundled dataset so UX is not blank.
+        setProjects(INITIAL_PROJECTS);
       } finally {
         setIsLoading(false);
       }
